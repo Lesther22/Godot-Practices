@@ -1,0 +1,192 @@
+[gd_scene load_steps=32 format=3 uid="uid://drkbkd0srhad8"]
+
+[ext_resource type="Script" path="res://Scripts/GuyScript.gd" id="1_fx7vr"]
+[ext_resource type="Texture2D" uid="uid://bnnyudrx2pfdf" path="res://GuySprites/Guy_Idle/Guy_Idle1.png" id="2_ojmwv"]
+[ext_resource type="Texture2D" uid="uid://cyts2ltkmm5nb" path="res://GuySprites/Guy_Idle/Guy_Idle2.png" id="3_c6rul"]
+[ext_resource type="Texture2D" uid="uid://bkw300a0w3slk" path="res://GuySprites/Guy_Crouch/Guy_Crouch3.png" id="4_qbsih"]
+[ext_resource type="Texture2D" uid="uid://c7bngfdbtag6f" path="res://GuySprites/Guy_Idle/Guy_Idle3.png" id="4_y2vyc"]
+[ext_resource type="Texture2D" uid="uid://tw7yd4p75q7c" path="res://GuySprites/Guy_Idle/Guy_Idle4.png" id="5_a31gy"]
+[ext_resource type="Texture2D" uid="uid://d04rx1c3xit3g" path="res://GuySprites/Guy_Walk/Guy_Walk1.png" id="6_hyffv"]
+[ext_resource type="Texture2D" uid="uid://h846uoc01uvc" path="res://GuySprites/Guy_Walk/Guy_Walk2.png" id="7_0gb1d"]
+[ext_resource type="Texture2D" uid="uid://cdr34n2i686fr" path="res://GuySprites/Guy_Walk/Guy_Walk3.png" id="8_ybl1w"]
+[ext_resource type="Texture2D" uid="uid://cmrmhlwd1n05q" path="res://GuySprites/Guy_Walk/Guy_Walk4.png" id="9_flu8i"]
+[ext_resource type="Texture2D" uid="uid://duerxt8jvs43d" path="res://GuySprites/Guy_Jump/Guy_Jump2.png" id="10_1s1cj"]
+[ext_resource type="Texture2D" uid="uid://cbqu6q2klccbf" path="res://GuySprites/Guy_Walk/Guy_Walk5.png" id="10_mv4jd"]
+[ext_resource type="Texture2D" uid="uid://bmtidygnamdwq" path="res://GuySprites/Guy_Walk/Guy_Walk6.png" id="11_efwa3"]
+[ext_resource type="Texture2D" uid="uid://dfh0f1c28t13r" path="res://GuySprites/Guy_Jump/Guy_Jump3.png" id="11_prapf"]
+[ext_resource type="Texture2D" uid="uid://6uuq7f2x2db0" path="res://GuySprites/Guy_Jump/Guy_Jump4.png" id="12_62kos"]
+[ext_resource type="Texture2D" uid="uid://cavgv7cbiiepf" path="res://GuySprites/Guy_Walk/Guy_Walk7.png" id="12_ymr5x"]
+[ext_resource type="Texture2D" uid="uid://33iy4mqsbkp6" path="res://GuySprites/Guy_Jump/Guy_Jump1.png" id="13_1ul2r"]
+[ext_resource type="Texture2D" uid="uid://culvtk7rtb5gy" path="res://GuySprites/Guy_Walk/Guy_Walk8.png" id="13_811lg"]
+[ext_resource type="Texture2D" uid="uid://b1avmb5m2jsrk" path="res://GuySprites/Guy_Jump/Guy_Jump5.png" id="13_n8qpu"]
+[ext_resource type="Texture2D" uid="uid://c80ir2dhr84wp" path="res://GuySprites/Guy_Walk/Guy_Walk9.png" id="14_3422h"]
+[ext_resource type="Texture2D" uid="uid://dt2di33y5houj" path="res://GuySprites/Guy_Walk/Guy_Walk10.png" id="15_umtd2"]
+[ext_resource type="Texture2D" uid="uid://wan05vqetym8" path="res://GuySprites/Guy_Walk/Guy_Walk11.png" id="16_fy012"]
+[ext_resource type="PackedScene" uid="uid://nal0klnly22s" path="res://Scripts/state_machine.tscn" id="23_tivvq"]
+[ext_resource type="Script" path="res://Scripts/Player_States/Player_State_Idle.gd" id="24_xdc2b"]
+[ext_resource type="Script" path="res://Scripts/Player_States/Player_State_Running.gd" id="25_upfvc"]
+[ext_resource type="Script" path="res://Scripts/Player_States/Player_State_Jump.gd" id="26_hnvb1"]
+[ext_resource type="Script" path="res://Scripts/Player_States/Player_State_Crouch.gd" id="27_ivqqg"]
+[ext_resource type="PackedScene" uid="uid://dl4ph0mjy2j3b" path="res://Scenes/health_component.tscn" id="28_lh0ly"]
+[ext_resource type="PackedScene" uid="uid://b043k6767vkml" path="res://Scenes/HitBoxComponent.tscn" id="29_p0php"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h24vt"]
+size = Vector2(41, 105)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rds0b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qbsih")
+}],
+"loop": false,
+"name": &"Guy_Crouch",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_n8qpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_62kos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_prapf")
+}, {
+"duration": 3.0,
+"texture": ExtResource("10_1s1cj")
+}],
+"loop": false,
+"name": &"Guy_Fall",
+"speed": 13.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": ExtResource("2_ojmwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c6rul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y2vyc")
+}, {
+"duration": 4.0,
+"texture": ExtResource("5_a31gy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y2vyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c6rul")
+}],
+"loop": false,
+"name": &"Guy_Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_1ul2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_1s1cj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_prapf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_62kos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_n8qpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_62kos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_prapf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_1s1cj")
+}],
+"loop": false,
+"name": &"Guy_Jump",
+"speed": 13.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_hyffv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0gb1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ybl1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_flu8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mv4jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_efwa3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ymr5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_811lg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_3422h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_umtd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fy012")
+}],
+"loop": true,
+"name": &"Guy_Walk",
+"speed": 19.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+floor_constant_speed = true
+script = ExtResource("1_fx7vr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 1.5)
+shape = SubResource("RectangleShape2D_h24vt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rds0b")
+animation = &"Guy_Idle"
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("default_state") instance=ExtResource("23_tivvq")]
+default_state = NodePath("PLAYER_IDLE")
+
+[node name="PLAYER_JUMP" type="Node" parent="StateMachine"]
+script = ExtResource("26_hnvb1")
+
+[node name="PLAYER_IDLE" type="Node" parent="StateMachine"]
+script = ExtResource("24_xdc2b")
+
+[node name="PLAYER_RUNNING" type="Node" parent="StateMachine"]
+script = ExtResource("25_upfvc")
+
+[node name="PLAYER_CROUCHED" type="Node" parent="StateMachine"]
+script = ExtResource("27_ivqqg")
+
+[node name="HealthComponent" parent="." instance=ExtResource("28_lh0ly")]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(9, 4)
+scale = Vector2(1.6, 5)
+collision_layer = 2
+collision_mask = 4
+max_health = 1
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("29_p0php")]
+position = Vector2(-4, -9)

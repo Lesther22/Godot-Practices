@@ -1,0 +1,1 @@
+extends Stado_Base

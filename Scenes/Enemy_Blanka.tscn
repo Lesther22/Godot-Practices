@@ -1,0 +1,129 @@
+[gd_scene load_steps=23 format=3 uid="uid://cnalhl8fxygxg"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_blanka.gd" id="1_cysyy"]
+[ext_resource type="Texture2D" uid="uid://dx3qjuempu0kb" path="res://Enemys/Blanka_Idle1.png" id="1_smjri"]
+[ext_resource type="Texture2D" uid="uid://hk7eeu8jtq12" path="res://Enemys/Blanka_Idle2.png" id="2_5731p"]
+[ext_resource type="Texture2D" uid="uid://c7ps5f4vrbq5w" path="res://Enemys/Blanka_Idle3.png" id="3_crepp"]
+[ext_resource type="Texture2D" uid="uid://cf1frvce2ousr" path="res://Enemys/Blanka_Idle4.png" id="4_04j6u"]
+[ext_resource type="Texture2D" uid="uid://bx7q4uh585d6k" path="res://Enemys/Blanka_Running/Blanka_Running1.png" id="6_ovrgf"]
+[ext_resource type="Texture2D" uid="uid://go6ov121677i" path="res://Enemys/Blanka_Running/Blanka_Running2.png" id="7_2erj6"]
+[ext_resource type="Texture2D" uid="uid://brlq6482ce04k" path="res://Enemys/Blanka_Running/Blanka_Running3.png" id="8_mh1bm"]
+[ext_resource type="Texture2D" uid="uid://dgsrmq4cno6yd" path="res://Enemys/Blanka_Running/Blanka_Running4.png" id="9_uvg20"]
+[ext_resource type="Texture2D" uid="uid://ciagd00erign6" path="res://Enemys/Blanka_Running/Blanka_Running5.png" id="10_jq8yx"]
+[ext_resource type="Texture2D" uid="uid://dus5ot1xi1uop" path="res://Enemys/Blanka_Running/Blanka_Running6.png" id="11_2c6li"]
+[ext_resource type="Texture2D" uid="uid://drau77xojhcpa" path="res://Enemys/Blanka_Running/Blanka_Running7.png" id="12_e6qbr"]
+[ext_resource type="Texture2D" uid="uid://q7ltowjxxj65" path="res://Enemys/Blanka_Running/Blanka_Running8.png" id="13_stap3"]
+[ext_resource type="PackedScene" uid="uid://b043k6767vkml" path="res://Scenes/HitBoxComponent.tscn" id="14_qx7cm"]
+[ext_resource type="PackedScene" uid="uid://dl4ph0mjy2j3b" path="res://Scenes/health_component.tscn" id="15_venrs"]
+[ext_resource type="PackedScene" uid="uid://ch1ha76h8av88" path="res://Scenes/Sensor.tscn" id="16_f1g36"]
+[ext_resource type="PackedScene" uid="uid://nal0klnly22s" path="res://Scripts/state_machine.tscn" id="17_kbll0"]
+[ext_resource type="Script" path="res://Scripts/Enemy's_States/Blanka_State_Attack.gd" id="18_j1il5"]
+[ext_resource type="Script" path="res://Scripts/Enemy's_States/Blanka_State_Running.gd" id="19_n4ck1"]
+[ext_resource type="Script" path="res://Scripts/Enemy's_States/Blanka_State_Idle.gd" id="20_f44cd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dx1b2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_smjri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5731p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_crepp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_04j6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_crepp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5731p")
+}],
+"loop": true,
+"name": &"Blanka_Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ovrgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2erj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mh1bm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_uvg20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jq8yx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2c6li")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e6qbr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_stap3")
+}],
+"loop": true,
+"name": &"Blanka_Walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_td2jr"]
+size = Vector2(62, 79.75)
+
+[node name="Blanka" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_cysyy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, -14)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_dx1b2")
+animation = &"Blanka_Idle"
+frame_progress = 0.692077
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(6, 7.125)
+shape = SubResource("RectangleShape2D_td2jr")
+
+[node name="Sensor" parent="." instance=ExtResource("16_f1g36")]
+position = Vector2(-35, -14)
+collision_layer = 0
+collision_mask = 2
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("14_qx7cm")]
+visible = false
+position = Vector2(-14, -6)
+collision_layer = 0
+collision_mask = 2
+
+[node name="HealthComponent" parent="." instance=ExtResource("15_venrs")]
+visible = false
+position = Vector2(1, -2)
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("default_state") instance=ExtResource("17_kbll0")]
+default_state = NodePath("BLANKA_RUNNING")
+
+[node name="BLANKA_ATTACK" type="Node" parent="StateMachine"]
+script = ExtResource("18_j1il5")
+
+[node name="BLANKA_RUNNING" type="Node" parent="StateMachine"]
+script = ExtResource("19_n4ck1")
+
+[node name="BLANKA_IDLE" type="Node" parent="StateMachine"]
+script = ExtResource("20_f44cd")
+
+[connection signal="body_entered" from="Sensor" to="." method="_on_sensor_body_entered"]
+[connection signal="body_entered" from="Sensor" to="StateMachine/BLANKA_RUNNING" method="_on_sensor_body_entered"]
+[connection signal="body_exited" from="Sensor" to="." method="_on_sensor_body_exited"]
+[connection signal="body_exited" from="Sensor" to="StateMachine/BLANKA_RUNNING" method="_on_sensor_body_exited"]
