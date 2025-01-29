@@ -1,6 +1,5 @@
 extends Area2D
 class_name HealthComponent
-
 signal onDead
 signal onTakeDamage
 
@@ -20,6 +19,7 @@ func take_damage(damage: int):
 func set_health(value: int):
 	current_health += value
 	current_health = clamp(current_health,0,max_health)
+	print(owner.name," tiene: ",current_health, " pto. de vida")
 	
 	if current_health <= 0:
 		end()

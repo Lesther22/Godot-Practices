@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://drkbkd0srhad8"]
+[gd_scene load_steps=34 format=3 uid="uid://drkbkd0srhad8"]
 
 [ext_resource type="Script" path="res://Scripts/GuyScript.gd" id="1_fx7vr"]
 [ext_resource type="Texture2D" uid="uid://bnnyudrx2pfdf" path="res://GuySprites/Guy_Idle/Guy_Idle1.png" id="2_ojmwv"]
@@ -14,10 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://cbqu6q2klccbf" path="res://GuySprites/Guy_Walk/Guy_Walk5.png" id="10_mv4jd"]
 [ext_resource type="Texture2D" uid="uid://bmtidygnamdwq" path="res://GuySprites/Guy_Walk/Guy_Walk6.png" id="11_efwa3"]
 [ext_resource type="Texture2D" uid="uid://dfh0f1c28t13r" path="res://GuySprites/Guy_Jump/Guy_Jump3.png" id="11_prapf"]
+[ext_resource type="Texture2D" uid="uid://byp6jl3n8bnpq" path="res://GuySprites/Guy_Golpes/Guy_Punch1.png" id="12_8gfvn"]
 [ext_resource type="Texture2D" uid="uid://6uuq7f2x2db0" path="res://GuySprites/Guy_Jump/Guy_Jump4.png" id="12_62kos"]
 [ext_resource type="Texture2D" uid="uid://cavgv7cbiiepf" path="res://GuySprites/Guy_Walk/Guy_Walk7.png" id="12_ymr5x"]
 [ext_resource type="Texture2D" uid="uid://33iy4mqsbkp6" path="res://GuySprites/Guy_Jump/Guy_Jump1.png" id="13_1ul2r"]
 [ext_resource type="Texture2D" uid="uid://culvtk7rtb5gy" path="res://GuySprites/Guy_Walk/Guy_Walk8.png" id="13_811lg"]
+[ext_resource type="Texture2D" uid="uid://dgoj62om626rn" path="res://GuySprites/Guy_Golpes/Guy_Punch2.png" id="13_mjiaw"]
 [ext_resource type="Texture2D" uid="uid://b1avmb5m2jsrk" path="res://GuySprites/Guy_Jump/Guy_Jump5.png" id="13_n8qpu"]
 [ext_resource type="Texture2D" uid="uid://c80ir2dhr84wp" path="res://GuySprites/Guy_Walk/Guy_Walk9.png" id="14_3422h"]
 [ext_resource type="Texture2D" uid="uid://dt2di33y5houj" path="res://GuySprites/Guy_Walk/Guy_Walk10.png" id="15_umtd2"]
@@ -114,6 +116,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("12_8gfvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_mjiaw")
+}],
+"loop": true,
+"name": &"Guy_Punch",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_hyffv")
 }, {
 "duration": 1.0,
@@ -162,7 +175,9 @@ shape = SubResource("RectangleShape2D_h24vt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rds0b")
-animation = &"Guy_Idle"
+animation = &"Guy_Punch"
+frame = 1
+frame_progress = 0.107453
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("default_state") instance=ExtResource("23_tivvq")]
 default_state = NodePath("PLAYER_IDLE")
@@ -173,20 +188,21 @@ script = ExtResource("26_hnvb1")
 [node name="PLAYER_IDLE" type="Node" parent="StateMachine"]
 script = ExtResource("24_xdc2b")
 
-[node name="PLAYER_RUNNING" type="Node" parent="StateMachine"]
-script = ExtResource("25_upfvc")
-
 [node name="PLAYER_CROUCHED" type="Node" parent="StateMachine"]
 script = ExtResource("27_ivqqg")
+
+[node name="PLAYER_RUNNING" type="Node" parent="StateMachine"]
+script = ExtResource("25_upfvc")
 
 [node name="HealthComponent" parent="." instance=ExtResource("28_lh0ly")]
 light_mask = 3
 visibility_layer = 3
-position = Vector2(9, 4)
-scale = Vector2(1.6, 5)
+position = Vector2(-3, 1)
+scale = Vector2(1.28, 4)
 collision_layer = 2
 collision_mask = 4
-max_health = 1
+max_health = 5
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("29_p0php")]
-position = Vector2(-4, -9)
+position = Vector2(30, -28)
+scale = Vector2(2, 1)
